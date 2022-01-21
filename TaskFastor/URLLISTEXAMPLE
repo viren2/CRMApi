@@ -1,0 +1,196 @@
+Note :- Kindly share the
+
+
+Django Python Machine Test
+
+Consider the following scenario where we have 3 entities in our system.
+
+1. Employee
+2. Teacher
+3. Student
+ 
+We have the number of users registered in our system.
+You can use Django’s default admin template to create/register users but not other entities or you can make REST APIs for users as well if you want.
+ 
+
+You have to perform the following tasks :
+
+Create REST APIs based on Django with PostgreSQL database. It
+should contain:
+1. User Sign Up/Forgot Password APIs.
+2. Uses JWT authentication. 3. Must define 
+3 user levels: 1. Employee, 2. Teacher, 3. Student (Use
+internal Django Groups to achieve the same).
+4. Teacher must be able to add/list the students.
+5. Employee must be able to add/list every user in the database.
+6. Students must be able to see his information only.
+7. Code should be commented for clarit
+
+Things to consider :
+
+1. The system has many Employee
+2. The system has many Teacher.
+3. A Student show information
+
+ 
+-------------------------------------------------------------
+ 
+Given are the examples of REST APIs you have to build.
+ 
+
+List of all clients
+
+GET /Employee/
+[
+     {
+        "id": 4,
+        "employee_name": "shubham soni",
+        "user_add": "shiv",
+        "email_id": "srajput12213@gmail.com",
+        "password": "123",
+        "teacher": "http://127.0.0.1:8000/teacher/3/?format=api",
+        "student": "http://127.0.0.1:8000/student/1/?format=api"
+    },
+    {
+        "id": 5,
+        "employee_name": "viren",
+        "user_add": "neeraj",
+        "email_id": "virendrarajput041@gmail.com",
+        "password": "12345",
+        "teacher": "http://127.0.0.1:8000/teacher/4/?format=api",
+        "student": "http://127.0.0.1:8000/student/4/?format=api"
+    },
+    {
+        "id": 6,
+        "employee_name": "sagar",
+        "user_add": "neha",
+        "email_id": "sagarnamdev93@gmail.com",
+        "password": "sagar12345",
+        "teacher": "http://127.0.0.1:8000/teacher/4/?format=api",
+        "student": "http://127.0.0.1:8000/student/1/?format=api"
+    },
+    {
+        "id": 7,
+        "employee_name": "nikhil yadav",
+        "user_add": "haren",
+        "email_id": "nikhilyadav2001@yahoo.com",
+        "password": "nikhil123",
+        "teacher": "http://127.0.0.1:8000/teacher/5/?format=api",
+        "student": "http://127.0.0.1:8000/student/1/?format=api"
+    }
+-------------------------------------------------------------
+ 
+
+Create a Teacher to add student
+
+POST /Teacher/
+ 
+[
+     {
+        "id": 3,
+        "teacher_name": "Deepak joshi",
+        "student_add": "sagar Namdev",
+        "update_date": "2022-01-20T16:19:28.345381Z",
+        "email_id": "deepakjoshi65@gmail.com"
+    },
+    {
+        "id": 4,
+        "teacher_name": "sanjeev chouhan",
+        "student_add": "sachin",
+        "update_date": "2022-01-20T16:20:03.932083Z",
+        "email_id": "sanjeevchouhan96@gmail.com"
+    },
+    {
+        "id": 5,
+        "teacher_name": "renu mewada",
+        "student_add": "shikha  soni",
+        "update_date": "2022-01-20T16:42:33.142360Z",
+        "email_id": "renumewada93@gmail.com"
+    },
+    {
+        "id": 6,
+        "teacher_name": "anand Rajput",
+        "student_add": "Banti",
+        "update_date": "2022-01-20T16:43:20.258978Z",
+        "email_id": "anandrajput96@gmail.com"
+    }
+]
+
+Retrieve info of a Student along with  assigned to its Teacher
+
+GET /Student/:id   	
+ 
+[ {
+        "id": 2,
+        "student_name": "Abhishek",
+        "course_name": "java",
+        "class_name": "B.Tech",
+        "email_id": ""
+    },
+    {
+        "id": 4,
+        "student_name": "pari",
+        "course_name": "science",
+        "class_name": "9th",
+        "email_id": "parirajput93@gmail.com"
+    },
+    {
+        "id": 5,
+        "student_name": "piyush",
+        "course_name": "math",
+        "class_name": "12th",
+        "email_id": "piyushjain93@gmail.com"
+    },
+    {
+        "id": 1,
+        "student_name": "raj kushwah",
+        "course_name": "python course",
+        "class_name": "B.Tech",
+        "email_id": "rajkushwah96@gmail.com"
+    }
+]--------------------------------------
+ 
+
+DELETE /Student/teacher/:id
+http://127.0.0.1:8000/student/1/
+
+ 
+
+ 
+------------------------------------------------------------
+ 
+
+Create a new project
+
+POST /:id/projects/
+ 
+Here you do not need to create any new user but assign already registered users.
+retrieve teacher id from the url and assign it to a student
+ 
+#super-admin
+username= admin@gmail.com
+Password =viren123
+
+
+
+API URL
+
+{
+  "Employee": "http://127.0.0.1:8000/Employee/?format=api",
+    "teacher": "http://127.0.0.1:8000/teacher/?format=api",
+    "student": "http://127.0.0.1:8000/student/?format=api",
+
+Step-2 url:
+Now, we need to authenticate and obtain the token. which we will get at endpoint is
+
+http://127.0.0.1:8000/api/token/
+
+add your user name and password
+username =admin@gmail
+Password =viren123
+
+Step 3 :
+copy access token and make a request:
+ 
+  http://127.0.0.1:8000/hello/
+
